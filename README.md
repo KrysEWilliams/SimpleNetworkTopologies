@@ -1,5 +1,7 @@
 # SimpleNetworkTopology
 
+[![Documentation Status](https://readthedocs.org/projects/simplenetworktopologies/badge/?version=latest)](https://simplenetworktopologies.readthedocs.io/en/latest/?badge=latest)
+
 This code is used to visualize simple computer network topologies.
 
 ## Usage
