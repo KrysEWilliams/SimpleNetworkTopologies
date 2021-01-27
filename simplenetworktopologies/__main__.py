@@ -5,66 +5,109 @@ It is used to visualize simple computer network topologies.
 """
 
 import sys
-import os
-import numpy as np
 import pyqtgraph as pg
-from PyQt5 import QtGui, QtCore, QtWidgets, uic
-import mymath
+from PyQt5 import QtGui, QtWidgets
 
-class simplenetworktopologies(QtWidgets.QMainWindow):
+import networks as nw
+
+VIEWERWIDTH = 3  # half-width of viewer
+
+
+class NetworkViewer(pg.GraphicsLayoutWidget):
+    """ main class for viewing networks """
+    def __init__(self):
+        super(NetworkViewer, self).__init__()
+        self.v = self.addViewBox()
+        self.v.setAspectLocked()
+        self.v.setLimits(xMin=-VIEWERWIDTH, xMax=VIEWERWIDTH,
+                         yMin=-VIEWERWIDTH, yMax=VIEWERWIDTH)
+        self.v.setXRange(-VIEWERWIDTH, VIEWERWIDTH)
+        self.v.setYRange(-VIEWERWIDTH, VIEWERWIDTH)
+
+        self.generic = nw.generic_network()
+        self.v.addItem(self.generic)
+
+        # initialize all other networks
+        N_ring = 5   # change this value to affect number of nodes in Ring
+        self.ring = nw.Ring(N_ring)
+
+    def show_network(self, name):
+        self.v.clear()
+
+        if name == "Generic":
+            self.v.addItem(self.generic)
+        elif name == "Ring":
+            self.v.addItem(self.ring)
+
+
+class networkChooser(QtWidgets.QWidget):
+    """ main settings class for which network to view """
+    def __init__(self, parent=None):
+        super(networkChooser, self).__init__(parent)
+
+        layout = QtWidgets.QVBoxLayout()
+        solution_label = QtGui.QLabel("Choose which network to view")
+        self.viewGenericRadio = QtGui.QRadioButton("Generic")
+        self.viewRingRadio = QtGui.QRadioButton("Ring")
+
+        self.viewGenericRadio.setChecked(True)
+
+        layout.addWidget(solution_label)
+        layout.addWidget(self.viewGenericRadio)
+        layout.addWidget(self.viewRingRadio)
+
+        self.setLayout(layout)
+
+
+class Settings(QtWidgets.QWidget):
+    """ main settings class """
+    def __init__(self, parent=None):
+        super(Settings, self).__init__(parent)
+
+        layout = QtWidgets.QVBoxLayout()
+
+        self.nc = networkChooser()
+
+        layout.addWidget(self.nc)
+
+        self.setLayout(layout)
+
+
+class MainWindow(QtWidgets.QMainWindow):
     """ main class for SimpleNetworkTopologies """
     def __init__(self):
-        super(simplenetworktopologies, self).__init__()
+        super(MainWindow, self).__init__()
+
         self.init_ui()
 
     def init_ui(self):
-        uiPath = os.path.join("simplenetworktopologies","ui","simplenetworktopologies.ui")
-        self.ui = uic.loadUi(uiPath)
+        self.setWindowTitle('SimpleNetworkTopologies')
+        self.resize(1000, 600)
 
-        self.ui.setWindowTitle('SimpleNetworkTopologies')
-        #self.ui.setWindowIcon(QtGui.QIcon('logo.png'))
+        self.nv = NetworkViewer()
+        self.sl = Settings()
 
-        # this is just a test that mymath was imported as expected
-        a = mymath.my_square_root(324.0)
+        main_layout = QtWidgets.QHBoxLayout()
+        main_layout.addWidget(self.nv)
+        main_layout.addWidget(self.sl)
 
-        self.scene = QtGui.QGraphicsScene()
-        self.ui.mywidget.setScene(self.scene)
+        main_widget = QtWidgets.QWidget()
+        main_widget.setLayout(main_layout)
+        self.setCentralWidget(main_widget)
 
-        ellipse1 = QtGui.QGraphicsEllipseItem(0,0,100,10)
-        ellipse1.setBrush(QtGui.QBrush(QtCore.Qt.red, style = QtCore.Qt.SolidPattern))        
-        self.scene.addItem(ellipse1) # add ellipse!
-        
-        # there's gotta be a better way to do this, but I don't have it now.
-        self.ui.checkBox1.setChecked(True)
-        self.ui.checkBox1.stateChanged.connect(lambda:self.checkbox_state(self.ui.checkBox1))
-        self.ui.checkBox2.setChecked(True)
-        self.ui.checkBox2.stateChanged.connect(lambda:self.checkbox_state(self.ui.checkBox2))
-        self.ui.checkBox3.setChecked(True)
-        self.ui.checkBox3.stateChanged.connect(lambda:self.checkbox_state(self.ui.checkBox3))
-        self.ui.checkBox4.setChecked(True)
-        self.ui.checkBox4.stateChanged.connect(lambda:self.checkbox_state(self.ui.checkBox4))
-        self.ui.checkBox5.setChecked(True)
-        self.ui.checkBox5.stateChanged.connect(lambda:self.checkbox_state(self.ui.checkBox5))
-        # this doesn't work as expected, but it is the closest alternative
-        #self.checkboxes = (self.ui.checkboxes.itemAt(i).widget() for i in range(self.ui.checkboxes.count())) 
-        #for item in self.checkboxes:
-        #    item.setChecked(True)
-        #    item.stateChanged.connect(lambda:self.checkbox_state(item))
-
-        self.ui.show()
-
-    def checkbox_state(self,b):
-        if b.isChecked():
-            print(b.text()+" is selected")
-        else:
-            print(b.text()+" is deselected")
+        self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.nv.show_network("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(lambda: self.nv.show_network("Ring"))
 
 
 def main():
     app = QtGui.QApplication(sys.argv)
     app.setApplicationName('SimpleNetworkTopologies')
-    simplenetworktopologies()
+
+    main = MainWindow()
+    main.show()
+
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()
