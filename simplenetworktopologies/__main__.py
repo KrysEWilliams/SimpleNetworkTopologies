@@ -31,6 +31,8 @@ class NetworkViewer(pg.GraphicsLayoutWidget):
         N_ring = 5   # change this value to affect number of nodes in Ring
         self.ring = nw.Ring(N_ring)
 
+        self.bus = nw.Bus()
+
     def show_network(self, name):
         self.v.clear()
 
@@ -38,6 +40,8 @@ class NetworkViewer(pg.GraphicsLayoutWidget):
             self.v.addItem(self.generic)
         elif name == "Ring":
             self.v.addItem(self.ring)
+        elif name == "Bus":
+            self.v.addItem(self.bus)
 
 
 class networkChooser(QtWidgets.QWidget):
@@ -49,12 +53,14 @@ class networkChooser(QtWidgets.QWidget):
         solution_label = QtGui.QLabel("Choose which network to view")
         self.viewGenericRadio = QtGui.QRadioButton("Generic")
         self.viewRingRadio = QtGui.QRadioButton("Ring")
+        self.viewBusRadio = QtGui.QRadioButton("Bus")
 
         self.viewGenericRadio.setChecked(True)
 
         layout.addWidget(solution_label)
         layout.addWidget(self.viewGenericRadio)
         layout.addWidget(self.viewRingRadio)
+        layout.addWidget(self.viewBusRadio)
 
         self.setLayout(layout)
 
@@ -69,6 +75,7 @@ class Settings(QtWidgets.QWidget):
         self.nc = networkChooser()
 
         layout.addWidget(self.nc)
+        layout.addStretch(1)
 
         self.setLayout(layout)
 
@@ -95,8 +102,10 @@ class MainWindow(QtWidgets.QMainWindow):
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
 
+        # connects settings to view window
         self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.nv.show_network("Generic"))
         self.sl.nc.viewRingRadio.toggled.connect(lambda: self.nv.show_network("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(lambda: self.nv.show_network("Bus"))
 
 
 def main():

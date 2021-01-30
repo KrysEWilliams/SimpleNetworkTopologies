@@ -184,3 +184,42 @@ class Ring(Network):
                 sizes[ti] = 0.5
 
         return sizes
+
+class Bus(Network):
+    def __init__(self):
+        super(Bus, self).__init__()
+        self.name = "Bus"
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        symb = self.get_symbols()
+        texts = self.get_texts()
+        sizes = get_sizes(symb)
+
+        self.setData(pos=pos, adj=adj, symbol=symb, pxMode=False,
+                     size=sizes, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [-1, 1],
+                        [-2, 0],
+                        [-1, 0],
+                        [0, 0],
+                        [1, 0],
+                        [0, 1]
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 2],
+                        [1, 2],
+                        [2, 3],
+                        [3, 5]
+                        ])
+
+    def get_texts(self):
+        return ["Point %d" % i for i in range(6)]
+
+    def get_symbols(self):
+        return ['s', 's', 'o', 'o', 'o', 's']
+
