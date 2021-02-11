@@ -33,6 +33,12 @@ class NetworkViewer(pg.GraphicsLayoutWidget):
 
         self.bus = nw.Bus()
 
+        self.fullyconnected = nw.FullyConnected()
+
+        self.mesh = nw.Mesh()
+
+        self.star = nw.Star()
+
     def show_network(self, name):
         self.v.clear()
 
@@ -42,7 +48,12 @@ class NetworkViewer(pg.GraphicsLayoutWidget):
             self.v.addItem(self.ring)
         elif name == "Bus":
             self.v.addItem(self.bus)
-
+        elif name == "FullyConnected":
+            self.v.addItem(self.fullyconnected)
+        elif name == "Mesh":
+            self.v.addItem(self.mesh)
+        elif name == "Star":
+            self.v.addItem(self.star)
 
 class networkChooser(QtWidgets.QWidget):
     """ main settings class for which network to view """
@@ -54,6 +65,9 @@ class networkChooser(QtWidgets.QWidget):
         self.viewGenericRadio = QtGui.QRadioButton("Generic")
         self.viewRingRadio = QtGui.QRadioButton("Ring")
         self.viewBusRadio = QtGui.QRadioButton("Bus")
+        self.viewStarRadio = QtGui.QRadioButton("Star")
+        self.viewMeshRadio = QtGui.QRadioButton("Mesh")
+        self.viewFullyConnectedRadio = QtGui.QRadioButton("FullyConnected")
 
         self.viewGenericRadio.setChecked(True)
 
@@ -61,6 +75,9 @@ class networkChooser(QtWidgets.QWidget):
         layout.addWidget(self.viewGenericRadio)
         layout.addWidget(self.viewRingRadio)
         layout.addWidget(self.viewBusRadio)
+        layout.addWidget(self.viewStarRadio)
+        layout.addWidget(self.viewMeshRadio)
+        layout.addWidget(self.viewFullyConnectedRadio)
 
         self.setLayout(layout)
 
@@ -106,6 +123,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.nv.show_network("Generic"))
         self.sl.nc.viewRingRadio.toggled.connect(lambda: self.nv.show_network("Ring"))
         self.sl.nc.viewBusRadio.toggled.connect(lambda: self.nv.show_network("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.nv.show_network("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.nv.show_network("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(lambda: self.nv.show_network("Star"))
+    
 
 
 def main():

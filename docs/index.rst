@@ -6,7 +6,11 @@
 Welcome to SimpleNetworkTopologies's documentation!
 ===================================================
 
-This is a sample edit.
+This executable software is a tool for users new to Networking topologies and setting them up correctly.
+ This program is meant for users to learn the 5 basic network topologies and what subnets are appropriate for each one.
+ The 5 topologies include the Generic, Ring, Star, Bus, Mesh, and Fullyconnected layouts. 
+ Learning how Networking topologies and subnets work is a great entry way into a feild like Cybersecurity or NetworkingAdministration,
+  where having a secure and functioning networkis of the upmost importance.
 
 .. toctree::
    :maxdepth: 2

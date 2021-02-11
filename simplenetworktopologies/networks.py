@@ -173,7 +173,7 @@ class Ring(Network):
         return ['s']*N
 
     def get_sizes(self, N):
-        symb = self.get_symbols()
+        symb = self.get_symbols(N)
         sizes = np.zeros(N)
         for ti in range(N):
             if symb[ti] == 's':
@@ -214,12 +214,128 @@ class Bus(Network):
                         [0, 2],
                         [1, 2],
                         [2, 3],
-                        [3, 5]
+                        [3, 5],
+                        [3, 4]
                         ])
 
     def get_texts(self):
         return ["Point %d" % i for i in range(6)]
 
     def get_symbols(self):
-        return ['s', 's', 'o', 'o', 'o', 's']
+        return ['s', 's', 'o', 'o','o', 's']
 
+class Mesh (Network):
+    def __init__(self):
+        super(Mesh, self).__init__()
+        self.name = "Mesh"
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        symb = self.get_symbols()
+        texts = self.get_texts()
+        sizes = get_sizes(symb)
+
+        self.setData(pos=pos, adj=adj, symbol=symb, pxMode=False,
+                     size=sizes, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [-1, 1],
+                        [-2, 0],
+                        [-1, 0],
+                        [0, 0],
+                        [1, 0],
+                        [0, 1]
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 2],
+                        [1, 2],
+                        [2, 3],
+                        [3, 5],
+                        [3, 4],
+                        [0, 1],
+                        [4, 5]
+                        ])
+
+    def get_texts(self):
+        return ["Point %d" % i for i in range(6)]
+
+    def get_symbols(self):
+        return ['s', 's', 'o', 'o','o', 's']
+
+class Star(Network):
+    def __init__(self):
+        super(Star, self).__init__()
+        self.name = "Star"
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        symb = self.get_symbols()
+        texts = self.get_texts()
+        sizes = get_sizes(symb)
+
+        self.setData(pos=pos, adj=adj, symbol=symb, pxMode=False,
+                     size=sizes, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [0, 0],
+                        [-1, 0],
+                        [1, 0],
+                        [0, -1],
+                        [0, 1]
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        [0, 2],
+                        [0, 3],
+                        [0, 4]
+                        ])
+
+    def get_texts(self):
+        return ["Point %d" % i for i in range(5)]
+
+    def get_symbols(self):
+        return ['o', 's', 's','s', 's']
+
+class FullyConnected(Network):
+    def __init__(self):
+        super(FullyConnected, self).__init__()
+        self.name = "FullyConnected"
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        symb = self.get_symbols()
+        texts = self.get_texts()
+        sizes = get_sizes(symb)
+
+        self.setData(pos=pos, adj=adj, symbol=symb, pxMode=False,
+                     size=sizes, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [-1, 0],
+                        [1, 0],
+                        [0, -1],
+                        [0, 1]
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        [0, 2],
+                        [0, 3],
+                        [1, 2],
+                        [1, 3],
+                        [2, 3]
+                        ])
+
+    def get_texts(self):
+        return ["Point %d" % i for i in range(4)]
+
+    def get_symbols(self):
+        return ['s', 's','s', 's']
