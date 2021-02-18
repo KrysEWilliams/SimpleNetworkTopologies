@@ -75,6 +75,64 @@ class Network(pg.GraphItem):
         print("clicked: %s" % pts)
 
 
+def ComputerSymbol():
+    # taken from: https://en.wikipedia.org/wiki/File:Simple_Monitor_Icon.svg
+    # and https://apps.automeris.io/wpd/
+    valves = np.asarray([
+                [0.063, 0.91],
+                [0.066, 0.93],
+                [0.075, 0.96],
+                [0.10, 0.98],
+                [0.12, 0.99],
+                [0.90, 0.99],
+                [0.93, 0.98],
+                [0.95, 0.96],
+                [0.96, 0.94],
+                [0.96, 0.92],
+                [0.94, 0.24],
+                [0.93, 0.21],
+                [0.91, 0.19],
+                [0.88, 0.17],
+                [0.63, 0.17],
+                [0.62, 0.068],
+                [0.81, 0.063],
+                [0.83, 0.054],
+                [0.83, 0.041],
+                [0.83, 0.024],
+                [0.82, 0.0051],
+                [0.81, -0.0013],
+                [0.15, 0.0015],
+                [0.14, 0.010],
+                [0.13, 0.021],
+                [0.13, 0.040],
+                [0.14, 0.059],
+                [0.16, 0.068],
+                [0.34, 0.067],
+                [0.35, 0.17],
+                [0.35, 0.22],
+                [0.87, 0.22],
+                [0.88, 0.23],
+                [0.89, 0.24],
+                [0.91, 0.92],
+                [0.91, 0.93],
+                [0.89, 0.93],
+                [0.13, 0.94],
+                [0.12, 0.93],
+                [0.11, 0.91],
+                [0.089, 0.25],
+                [0.095, 0.24],
+                [0.11, 0.23],
+                [0.35, 0.22],
+                [0.35, 0.18],
+                [0.090, 0.18],
+                [0.070, 0.19],
+                [0.054, 0.21],
+                [0.038, 0.24]
+                ])
+
+    return pg.arrayToQPath(valves[:, 0], valves[:, 1], connect='all')
+
+
 def get_sizes(symbols):
     N = len(symbols)
     sizes = np.zeros(N)
@@ -100,7 +158,7 @@ class generic_network(Network):
         texts = self.get_texts()
         sizes = get_sizes(symb)
 
-        self.setData(pos=pos, adj=adj, symbol=symb, pxMode=False,
+        self.setData(pos=pos, adj=adj, symbol=ComputerSymbol(), pxMode=False,
                      size=sizes, text=texts)
 
     def get_positions(self):
@@ -128,7 +186,7 @@ class generic_network(Network):
         return ["Point %d" % i for i in range(7)]
 
     def get_symbols(self):
-        return ['s', 's', 'o', 'o', 'o', '+', 's']
+        return ['s', 's', 'o', 'o', 'o', '+', 's'] 
 
 
 class Ring(Network):
@@ -185,6 +243,7 @@ class Ring(Network):
 
         return sizes
 
+
 class Bus(Network):
     def __init__(self):
         super(Bus, self).__init__()
@@ -223,6 +282,7 @@ class Bus(Network):
 
     def get_symbols(self):
         return ['s', 's', 'o', 'o','o', 's']
+
 
 class Mesh (Network):
     def __init__(self):
@@ -265,6 +325,7 @@ class Mesh (Network):
     def get_symbols(self):
         return ['s', 's', 'o', 'o','o', 's']
 
+
 class Star(Network):
     def __init__(self):
         super(Star, self).__init__()
@@ -301,6 +362,7 @@ class Star(Network):
 
     def get_symbols(self):
         return ['o', 's', 's','s', 's']
+
 
 class FullyConnected(Network):
     def __init__(self):
