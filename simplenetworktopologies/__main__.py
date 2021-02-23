@@ -13,6 +13,16 @@ import networks as nw
 VIEWERWIDTH = 3  # half-width of viewer
 
 
+class TextDisplay(QtWidgets.QLabel):
+    """ displays text """
+    def __init__(self):
+        super(TextDisplay, self).__init__()
+
+        self.setText("This is sample text \n"
+        "\n"
+        "You can do print whatever you want here")
+
+
 class NetworkViewer(pg.GraphicsLayoutWidget):
     """ main class for viewing networks """
     def __init__(self):
@@ -108,11 +118,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle('SimpleNetworkTopologies')
         self.resize(1000, 600)
 
+        self.text = TextDisplay()
         self.nv = NetworkViewer()
         self.sl = Settings()
 
+        left_l = QtWidgets.QVBoxLayout()
+        left_l.addWidget(self.text)
+        left_l.addWidget(self.nv)
+        self.left_w = QtWidgets.QWidget()
+        self.left_w.setLayout(left_l)
+
         main_layout = QtWidgets.QHBoxLayout()
-        main_layout.addWidget(self.nv)
+        main_layout.addWidget(self.left_w)
         main_layout.addWidget(self.sl)
 
         main_widget = QtWidgets.QWidget()
@@ -126,7 +143,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.nv.show_network("FullyConnected"))
         self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.nv.show_network("Mesh"))
         self.sl.nc.viewStarRadio.toggled.connect(lambda: self.nv.show_network("Star"))
-    
 
 
 def main():
