@@ -18,9 +18,33 @@ class TextDisplay(QtWidgets.QLabel):
     def __init__(self):
         super(TextDisplay, self).__init__()
 
-        self.setText("This is sample text \n"
-        "\n"
-        "You can do print whatever you want here")
+        # Krystal: define 6 string variables
+        self.example_text = "This is sample text\n" \
+        "\n" \
+        "You can do print whatever you want here"
+
+        self.setText(self.example_text)
+
+        self.generic_text = "generic"
+        self.ring_text = "ring_text"
+        self.bus_text = "bus_text"
+        self.fullyconnected_text = "fullyconnected_text"
+        self.mesh_text = "mesh_text"
+        self.star_text = "star_text"
+
+    def show_text(self, name):
+        if name == "Generic":
+            self.setText(self.generic_text)
+        elif name == "Ring":
+            self.setText(self.ring_text)
+        elif name == "Bus":
+            self.setText(self.bus_text)
+        elif name == "FullyConnected":
+            self.setText(self.fullyconnected_text)
+        elif name == "Mesh":
+            self.setText(self.mesh_text)
+        elif name == "Star":
+            self.setText(self.star_text)
 
 
 class NetworkViewer(pg.GraphicsLayoutWidget):
@@ -64,6 +88,7 @@ class NetworkViewer(pg.GraphicsLayoutWidget):
             self.v.addItem(self.mesh)
         elif name == "Star":
             self.v.addItem(self.star)
+
 
 class networkChooser(QtWidgets.QWidget):
     """ main settings class for which network to view """
@@ -118,6 +143,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle('SimpleNetworkTopologies')
         self.resize(1000, 600)
 
+        self.setWindowIcon(QtGui.QIcon("images/out.png"))
+
         self.text = TextDisplay()
         self.nv = NetworkViewer()
         self.sl = Settings()
@@ -143,6 +170,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.nv.show_network("FullyConnected"))
         self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.nv.show_network("Mesh"))
         self.sl.nc.viewStarRadio.toggled.connect(lambda: self.nv.show_network("Star"))
+
+        # connects settings to text display
+        self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.text.show_text("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(lambda: self.text.show_text("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(lambda: self.text.show_text("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.text.show_text("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.text.show_text("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(lambda: self.text.show_text("Star"))
 
 
 def main():
