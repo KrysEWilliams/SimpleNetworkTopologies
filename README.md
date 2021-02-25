@@ -7,7 +7,11 @@ This code is used to visualize simple computer network topologies.
 
 ## Usage
 
+This executable is for students or users new to Networking Topologies. This program will allow for users to see 6 examples of Networking Topologies that can be used to set up a network professionally. Using common layouts like Bus, Star, Ring, Mesh, FullyConnected, and Generic Topologies, the program is a great guide for learning what topology will work best in different situations(i.e Corporate Offices or Computer Labs).
+
 ## Installations
+
+To use the program, Download the zip file off of the Github repository. Then proceed to allow the program to run using the Windows App Wizard. This will allow users to interact with the program.
 
 ## Screenshots
 
