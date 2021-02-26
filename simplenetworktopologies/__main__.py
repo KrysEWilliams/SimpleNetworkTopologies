@@ -170,6 +170,34 @@ class MainWidget(QtWidgets.QWidget):
 
         self.setLayout(main_layout)
 
+        # connects settings to view window
+        self.sl.nc.viewGenericRadio.toggled.connect(
+            lambda: self.nv.show_network("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(
+            lambda: self.nv.show_network("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(
+            lambda: self.nv.show_network("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(
+            lambda: self.nv.show_network("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(
+            lambda: self.nv.show_network("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(
+            lambda: self.nv.show_network("Star"))
+
+        # connects settings to text display
+        self.sl.nc.viewGenericRadio.toggled.connect(
+            lambda: self.text.show_text("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(
+            lambda: self.text.show_text("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(
+            lambda: self.text.show_text("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(
+            lambda: self.text.show_text("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(
+            lambda: self.text.show_text("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(
+            lambda: self.text.show_text("Star"))
+
 
 class MainWindow(QtWidgets.QMainWindow):
     """ main window for SimpleNetworkTopologies """
@@ -187,22 +215,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # this needs to switch based on clicking a button
         self.setCentralWidget(self.intro_widget)
-
-        # connects settings to view window
-        self.main_widget.sl.nc.viewGenericRadio.toggled.connect(lambda: self.nv.show_network("Generic"))
-        self.main_widget.sl.nc.viewRingRadio.toggled.connect(lambda: self.nv.show_network("Ring"))
-        self.main_widget.sl.nc.viewBusRadio.toggled.connect(lambda: self.nv.show_network("Bus"))
-        self.main_widget.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.nv.show_network("FullyConnected"))
-        self.main_widget.sl.nc.viewMeshRadio.toggled.connect(lambda: self.nv.show_network("Mesh"))
-        self.main_widget.sl.nc.viewStarRadio.toggled.connect(lambda: self.nv.show_network("Star"))
-
-        # connects settings to text display
-        self.main_widget.sl.nc.viewGenericRadio.toggled.connect(lambda: self.text.show_text("Generic"))
-        self.main_widget.sl.nc.viewRingRadio.toggled.connect(lambda: self.text.show_text("Ring"))
-        self.main_widget.sl.nc.viewBusRadio.toggled.connect(lambda: self.text.show_text("Bus"))
-        self.main_widget.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.text.show_text("FullyConnected"))
-        self.main_widget.sl.nc.viewMeshRadio.toggled.connect(lambda: self.text.show_text("Mesh"))
-        self.main_widget.sl.nc.viewStarRadio.toggled.connect(lambda: self.text.show_text("Star"))
 
         self.intro_widget.enter_main_btn.clicked.connect(self.switch_to_main)
 
