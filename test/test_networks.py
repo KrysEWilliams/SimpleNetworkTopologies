@@ -6,6 +6,7 @@ import simplenetworktopologies.networks as nw
 class NetworksTest(unittest.TestCase):
 
     def test_constructors(self):
+        pass
         # need to initialize QApplication to avoid segfault on
         # generating networks
         #_ = pg.QtGui.QApplication(["test"])
