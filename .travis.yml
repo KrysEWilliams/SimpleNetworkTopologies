@@ -6,7 +6,7 @@ jobs:
       dist: focal
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
       before-install:
-        - sudo apt-get install -y libdbus-1-3 libxkbcommon-x11-0
+        - apt-get install libgl-dev qt5-default qttools5-dev-tools
       install: 
         - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
         - pip3 install -r requirements.txt
