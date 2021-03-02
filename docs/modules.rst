@@ -1,5 +1,5 @@
-simplenetworktopologies
-=======================
+API
+===
 
 .. toctree::
    :maxdepth: 4
