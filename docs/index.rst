@@ -6,6 +6,12 @@
 Welcome to SimpleNetworkTopologies's documentation!
 ===================================================
 
+SimpleNetworkTopologies is software for the visualization of different network
+topologies. It will be of use to anyone interested in learning more about network
+topology! Please see the :ref:`user-guide` for information on how to use
+SimpleNetworkTopologies, or the :ref:`developer-guide` for information on how to 
+contribute!
+
 How to Use :
 1. Download the executable from this repository using the zip file.
 2. Open the Zip file and allow the program to run.
@@ -20,14 +26,8 @@ This executable software is a tool for users new to Networking topologies and se
   This was an edit that made the release.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   userGuide
+   developerGuide
+   modules
