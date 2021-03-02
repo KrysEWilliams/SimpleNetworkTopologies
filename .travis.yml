@@ -5,15 +5,11 @@ jobs:
     - name: "Python 3.8.0 on Focal Linux"
       dist: focal
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
-      before-install:
-        - sudo add-apt-repository ppa:beineri/opt-qt-5.10.1-trusty -y
-        - sudo apt-get update -qq
       install:
-        - sudo apt-get -y install qt510base libgl1-mesa-dev
         - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
         - pip3 install -r requirements.txt
         - pip3 install pyinstaller
-      script: python3 -m unittest -v
+      script: python3 -s -m unittest -v
       before_deploy: pyinstaller --onefile --clean --paths simplenetworktopologies --name simplenetworktopologies_linux.exe simplenetworktopologies/__main__.py 
       deploy:
         provider: releases
