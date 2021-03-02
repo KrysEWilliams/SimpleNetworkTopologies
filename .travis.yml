@@ -6,7 +6,7 @@ jobs:
       dist: focal
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
       before-install:
-        - sudo apt-get -y install -qq libegl1-mesa
+        - sudo apt-get -y install libx11-xcb
       install: 
         - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
         - pip3 install -r requirements.txt
