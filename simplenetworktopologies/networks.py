@@ -1,6 +1,6 @@
 import numpy as np
 import pyqtgraph as pg
-from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5 import QtCore
 
 
 class Network(pg.GraphItem):
@@ -149,14 +149,15 @@ def get_sizes(symbols):
 
 class generic_network(Network):
     def __init__(self):
-        super(generic_network, self).__init__()
+        #super(generic_network, self).__init__()
+        Network.__init__(self)
         self.name = "Generic"
 
         pos = self.get_positions()
         adj = self.get_edges()
         symb = self.get_symbols()
         texts = self.get_texts()
-        sizes = get_sizes(symb)
+        sizes = self.get_sizestest(symb)
 
         self.setData(pos=pos, adj=adj, symbol=ComputerSymbol(), pxMode=False,
                      size=sizes, text=texts)
@@ -186,8 +187,20 @@ class generic_network(Network):
         return ["Point %d" % i for i in range(7)]
 
     def get_symbols(self):
-        return ['s', 's', 'o', 'o', 'o', '+', 's'] 
+        return ['s', 's', 'o', 'o', 'o', '+', 's']
 
+    def get_sizestest(self, symbols):
+        N = len(symbols)
+        sizes = np.zeros(N)
+        for ti in range(N):
+            if symbols[ti] == 's':
+                sizes[ti] = 0.5
+            elif symbols[ti] == 'o':
+                sizes[ti] = 0.1
+            elif symbols[ti] == '+':
+                sizes[ti] = 0.5
+
+        return sizes
 
 class Ring(Network):
     def __init__(self, N):
@@ -281,7 +294,7 @@ class Bus(Network):
         return ["Point %d" % i for i in range(6)]
 
     def get_symbols(self):
-        return ['s', 's', 'o', 'o','o', 's']
+        return ['s', 's', 'o', 'o', 'o', 's']
 
 
 class Mesh (Network):
@@ -323,7 +336,7 @@ class Mesh (Network):
         return ["Point %d" % i for i in range(6)]
 
     def get_symbols(self):
-        return ['s', 's', 'o', 'o','o', 's']
+        return ['s', 's', 'o', 'o', 'o', 's']
 
 
 class Star(Network):
@@ -361,7 +374,7 @@ class Star(Network):
         return ["Point %d" % i for i in range(5)]
 
     def get_symbols(self):
-        return ['o', 's', 's','s', 's']
+        return ['o', 's', 's', 's', 's']
 
 
 class FullyConnected(Network):
@@ -400,4 +413,4 @@ class FullyConnected(Network):
         return ["Point %d" % i for i in range(4)]
 
     def get_symbols(self):
-        return ['s', 's','s', 's']
+        return ['s', 's', 's', 's']
