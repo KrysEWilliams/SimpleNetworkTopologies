@@ -2,9 +2,9 @@ language: python            # this works for Linux but is an error on macOS or W
 
 jobs:
   include:
-    - name: "Python 3.9.0 on Focal Linux"
+    - name: "Python 3.8.0 on Focal Linux"
       dist: focal
-      python: 3.7           # this works for Linux but is ignored on macOS or Windows
+      python: 3.8           # this works for Linux but is ignored on macOS or Windows
       install:
         - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
         - pip3 install -r requirements.txt
