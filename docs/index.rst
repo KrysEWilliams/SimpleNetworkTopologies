@@ -6,28 +6,30 @@
 Welcome to SimpleNetworkTopologies's documentation!
 ===================================================
 
-How to Use :
-1. Download the executable from this repository using the zip file.
-2. Open the Zip file and allow the program to run.
-3. Once the program is open, there are 6 example network topologies to learn about.
-4. After learning about each basic topology, build your own network based on the prompt given to you. 
-This executable software is a tool for users new to Networking topologies and setting them up correctly.
- This program is meant for users to learn the 6 basic network topologies, and what subnets are appropriate for each one.
- The 6 basic topologies include the Generic, Ring, Star, Bus, Mesh, and Fullyconnected layouts. 
- Learning how Networking topologies and subnets work is a great entry way into a feild like Cybersecurity or NetworkingAdministration,
-  where having a secure and functioning network is of the upmost importance.
+SimpleNetworkTopologies is software for the visualization of different network
+topologies. It will be of use to anyone interested in learning more about network
+topology! Please see the :ref:`user-guide` for information on how to use
+SimpleNetworkTopologies, or the :ref:`developer-guide` for information on how to 
+contribute!
 
-  This was an edit that made the release.
+The 6 topologies to explore include:
+Generic- Generic Topologies are just basic setups of any number of nodes/ Computers that are connected in no specific way, and can be changed to accommodate different connections.
+
+Star- Star Networking topologies consist of each separate computer/ node that separately connect to a central switch or hub. This is a common topology that allows for continued use, if for some reason one cable or connection fails. 
+
+Bus- The Bus Networking topology is built using multiple nodes/ Computers connected to a switch or hub by a single connection cable.This is not too common due to its ability to run slower than normal, because of a high influx of connections all through one single cable.
+
+FullyConnected- FullyConnected topologies are made of a group of nodes that are each connected to every other node/computer on the network. This allows for fast connections within  a network simultaneously. 
+
+Ring- Ring Topologies are made of nodes that are connected by edges that pass around a token to receive connection. This is helpful when a Network needs to flow all in one direction.
+
+Mesh- Mesh is helpful to attend to different needs of a network. Like a hybrid of Generic and Fully Connected topologies that can be used to enstate a network with mixed needs.
+
+
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   userGuide
+   developerGuide
+   modules
