@@ -11,6 +11,8 @@ from PyQt5 import QtGui, QtWidgets
 import networks as nw
 
 VIEWERWIDTH = 3  # half-width of viewer
+WINDOW_WIDTH = 1000
+WINDOW_HEIGHT = 600
 
 
 class TextDisplay(QtWidgets.QLabel):
@@ -132,18 +134,25 @@ class Settings(QtWidgets.QWidget):
         self.setLayout(layout)
 
 
-class MainWindow(QtWidgets.QMainWindow):
-    """ main class for SimpleNetworkTopologies """
+class IntroWidget(QtWidgets.QWidget):
+    """ intro widget class for SimpleNetworkTopologies """
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super(IntroWidget, self).__init__()
 
-        self.init_ui()
+        self.intro_text = QtGui.QLabel("This is a label")
+        self.enter_main_btn = QtWidgets.QPushButton("This is a button")
 
-    def init_ui(self):
-        self.setWindowTitle('SimpleNetworkTopologies')
-        self.resize(1000, 600)
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(self.intro_text)
+        layout.addWidget(self.enter_main_btn)
 
-        self.setWindowIcon(QtGui.QIcon("images/out.png"))
+        self.setLayout(layout)
+
+
+class MainWidget(QtWidgets.QWidget):
+    """ main window for SimpleNetworkTopologies """
+    def __init__(self):
+        super(MainWidget, self).__init__()
 
         self.text = TextDisplay()
         self.nv = NetworkViewer()
@@ -159,25 +168,60 @@ class MainWindow(QtWidgets.QMainWindow):
         main_layout.addWidget(self.left_w)
         main_layout.addWidget(self.sl)
 
-        main_widget = QtWidgets.QWidget()
-        main_widget.setLayout(main_layout)
-        self.setCentralWidget(main_widget)
+        self.setLayout(main_layout)
 
         # connects settings to view window
-        self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.nv.show_network("Generic"))
-        self.sl.nc.viewRingRadio.toggled.connect(lambda: self.nv.show_network("Ring"))
-        self.sl.nc.viewBusRadio.toggled.connect(lambda: self.nv.show_network("Bus"))
-        self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.nv.show_network("FullyConnected"))
-        self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.nv.show_network("Mesh"))
-        self.sl.nc.viewStarRadio.toggled.connect(lambda: self.nv.show_network("Star"))
+        self.sl.nc.viewGenericRadio.toggled.connect(
+            lambda: self.nv.show_network("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(
+            lambda: self.nv.show_network("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(
+            lambda: self.nv.show_network("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(
+            lambda: self.nv.show_network("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(
+            lambda: self.nv.show_network("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(
+            lambda: self.nv.show_network("Star"))
 
         # connects settings to text display
-        self.sl.nc.viewGenericRadio.toggled.connect(lambda: self.text.show_text("Generic"))
-        self.sl.nc.viewRingRadio.toggled.connect(lambda: self.text.show_text("Ring"))
-        self.sl.nc.viewBusRadio.toggled.connect(lambda: self.text.show_text("Bus"))
-        self.sl.nc.viewFullyConnectedRadio.toggled.connect(lambda: self.text.show_text("FullyConnected"))
-        self.sl.nc.viewMeshRadio.toggled.connect(lambda: self.text.show_text("Mesh"))
-        self.sl.nc.viewStarRadio.toggled.connect(lambda: self.text.show_text("Star"))
+        self.sl.nc.viewGenericRadio.toggled.connect(
+            lambda: self.text.show_text("Generic"))
+        self.sl.nc.viewRingRadio.toggled.connect(
+            lambda: self.text.show_text("Ring"))
+        self.sl.nc.viewBusRadio.toggled.connect(
+            lambda: self.text.show_text("Bus"))
+        self.sl.nc.viewFullyConnectedRadio.toggled.connect(
+            lambda: self.text.show_text("FullyConnected"))
+        self.sl.nc.viewMeshRadio.toggled.connect(
+            lambda: self.text.show_text("Mesh"))
+        self.sl.nc.viewStarRadio.toggled.connect(
+            lambda: self.text.show_text("Star"))
+
+
+class MainWindow(QtWidgets.QMainWindow):
+    """ main window for SimpleNetworkTopologies """
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle('SimpleNetworkTopologies')
+        self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
+
+        self.setWindowIcon(QtGui.QIcon("images/out.png"))
+
+        # load in different 'main windows'
+        self.intro_widget = IntroWidget()
+        self.main_widget = MainWidget()
+
+        # this needs to switch based on clicking a button
+        self.setCentralWidget(self.intro_widget)
+
+        self.intro_widget.enter_main_btn.clicked.connect(self.switch_to_main)
+
+    def switch_to_main(self):
+        self.setCentralWidget(self.main_widget)
+
+        # define status bar and toolbar here
 
 
 def main():
