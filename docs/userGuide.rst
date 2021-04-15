@@ -24,6 +24,8 @@ Future Goals
 
 3. Make the executable compatible with windows wizard app.
 
+4. Fix issue where text at top pushes out width of app.
+
 Installation
 ------------
 
