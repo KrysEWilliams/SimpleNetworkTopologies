@@ -1,3 +1,8 @@
+"""
+.. module:: networks
+   :synopsis: defines functions and classes for creating networks.
+"""
+
 import numpy as np
 import pyqtgraph as pg
 from PyQt5 import QtCore
