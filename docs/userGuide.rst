@@ -15,6 +15,15 @@ Learning how Networking topologies and subnets work is a great entry way into a
 field like Cybersecurity or NetworkingAdministration, where having a secure and 
 functioning network is of the upmost importance.
 
+Future Goals
+------------
+
+1. Create a feature to allow users to build their own topology.
+
+2. Update original opening window. 
+
+3. Make the executable compatible with windows wizard app.
+
 Installation
 ------------
 
@@ -32,3 +41,9 @@ How to Use :
 
 Background
 ----------
+
+SimpleNetworkingTopologies aims to aid in educating those who are interested in how a Network is set up. 
+This is crucial for the fields or Cybersecurtiy or Network Management, because the secureness of a network 
+can either help or endanger a company/government. As the world continues to become more dependent on cyberspace,
+important information like debit/credit card information or social security numbers are all available to people with access. 
+This is why netowrks are mandatory to only give information on a need- to- know basis.
