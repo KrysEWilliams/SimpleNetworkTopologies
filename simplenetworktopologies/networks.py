@@ -2,6 +2,7 @@ import numpy as np
 import pyqtgraph as pg
 from PyQt5 import QtCore
 
+
 class Network(pg.GraphItem):
     """ Class for drawing and storing/computing network properties
 
@@ -76,6 +77,7 @@ class Network(pg.GraphItem):
 
 
 def SwitchSymbol():
+    """Symbol for switch device."""
     valves = np.asarray([
                     [-0.9782608695652174, -0.49173553719008334],
                     [0.9869565217391303, -0.4834710743801658],
@@ -148,8 +150,11 @@ def SwitchSymbol():
 
 
 def ComputerSymbol():
-    # taken from: https://en.wikipedia.org/wiki/File:Simple_Monitor_Icon.svg
-    # and https://apps.automeris.io/wpd/
+    """Symbol for computer device.
+
+    Taken from: https://en.wikipedia.org/wiki/File:Simple_Monitor_Icon.svg
+    and https://apps.automeris.io/wpd/
+    """
     valves = np.asarray([
                 [0.063, 0.91],
                 [0.066, 0.93],
@@ -207,11 +212,6 @@ def ComputerSymbol():
     return pg.arrayToQPath(new_valves[:, 0], new_valves[:, 1], connect='all')
 
 
-# set symbols
-#pg.ScatterPlotItem.Symbols['computer'] = ComputerSymbol()
-#pg.ScatterPlotItem.Symbols['switch'] = SwitchSymbol()
-
-
 def get_sizes(symbols):
     N = len(symbols)
     sizes = np.zeros(N)
@@ -225,6 +225,7 @@ def get_sizes(symbols):
 
 
 class generic_network(Network):
+    """Class for generic network."""
     def __init__(self):
         #super(generic_network, self).__init__()
         Network.__init__(self)
@@ -285,7 +286,9 @@ class generic_network(Network):
 
         return sizes
 
+
 class Ring(Network):
+    """Class for Ring network."""
     def __init__(self, N):
         super(Ring, self).__init__()
         self.name = "Ring"
@@ -341,6 +344,7 @@ class Ring(Network):
 
 
 class Bus(Network):
+    """Class for Bus network."""
     def __init__(self):
         super(Bus, self).__init__()
         self.name = "Bus"
@@ -380,7 +384,8 @@ class Bus(Network):
         return ['s', 's', 'o', 'o', 'o', 's']
 
 
-class Mesh (Network):
+class Mesh(Network):
+    """Class for Mesh network."""
     def __init__(self):
         super(Mesh, self).__init__()
         self.name = "Mesh"
@@ -423,6 +428,7 @@ class Mesh (Network):
 
 
 class Star(Network):
+    """Class for star network."""
     def __init__(self):
         super(Star, self).__init__()
         self.name = "Star"
@@ -461,6 +467,7 @@ class Star(Network):
 
 
 class FullyConnected(Network):
+    """Class for fully connected network."""
     def __init__(self):
         super(FullyConnected, self).__init__()
         self.name = "FullyConnected"

@@ -1,22 +1,10 @@
-simplenetworktopologies package
-===============================
+API
+===
 
-Submodules
-----------
-
-simplenetworktopologies.networks module
----------------------------------------
+These functions and classes listed below are used to build the network 
+component of SimpleNetworkTopologies.
 
 .. automodule:: simplenetworktopologies.networks
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: simplenetworktopologies
     :members:
     :undoc-members:
     :show-inheritance:

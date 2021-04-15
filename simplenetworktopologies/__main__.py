@@ -41,8 +41,7 @@ class TextDisplay(QtWidgets.QLabel):
         self.mesh_text = " Mesh is helpful to attend to different needs of a network. Like a hybrid of Generic and Fully Connected topologies that can be used to enstate a network with mixed needs."
 
         self.star_text = "Star Networking topologies consist of each separate computer/ node that separately connect to a central switch or hub. This is a common topology that allows for continued use, if for some reason one cable or connection fails. "
-        
-        
+
     def show_text(self, name):
         if name == "Generic":
             self.setText(self.generic_text)
