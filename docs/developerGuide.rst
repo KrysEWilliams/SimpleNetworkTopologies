@@ -4,6 +4,7 @@ Developer\'s Guide
 ******************
 
 How To Contribute:
+
 1. Download the repository from github to your local computer. (Preferrably to a folder in VisualStudioCode)
 
 2. Edit code and ctrl+S to save.
