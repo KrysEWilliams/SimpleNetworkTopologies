@@ -1,7 +1,6 @@
 """
-This is the module SimpleNetworkTopologies.
-
-It is used to visualize simple computer network topologies.
+.. module:: main
+   :synopsis: main entry point to app.
 """
 
 import sys
