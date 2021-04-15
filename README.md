@@ -14,3 +14,5 @@ To use the program, Download the zip file off of the Github repository. Then pro
 Contributions to ZFBrain are welcome! See the [Developer Guide](https://simplenetworktopologies.readthedocs.io/en/latest/developerGuide.html) for info on how to contribute.
 
 ## Screenshots
+
+![image](https://user-images.githubusercontent.com/72221785/114895500-8e8ef980-9ddd-11eb-9a0f-8efe02e59b32.png)
